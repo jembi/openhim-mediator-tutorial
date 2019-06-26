@@ -1,6 +1,6 @@
 # Mediator Tutorial Setup
 
-**TLDR; Watch Tutorial Setup on [YouTube](vidlink)**
+**TLDR; Watch Tutorial Setup on [YouTube](https://www.youtube.com/watch?v=DUr_mBWIVXk)**
 
 ## Introduction
 
