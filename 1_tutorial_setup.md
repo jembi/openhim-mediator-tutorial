@@ -2,6 +2,16 @@
 
 **TLDR; Watch Tutorial Setup on [YouTube](https://www.youtube.com/watch?v=DUr_mBWIVXk)**
 
+## Useful Links
+
+http://openhim.org/
+
+https://github.com/jembi/openhim-core-js
+
+https://github.com/jembi/openhim-mediator-bootstrap-scaffold
+
+https://www.jembi.org/
+
 ## Introduction
 
 > Tutorial purpose: To help get a custom OpenHIM mediator up and running with your business logic in place.
