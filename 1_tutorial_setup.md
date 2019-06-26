@@ -6,11 +6,11 @@
 
 > Tutorial purpose: To help get a custom OpenHIM mediator up and running with your business logic in place.
 
-The Open Health Information Mediator(OpenHIM) is a middleware component designed to allow data transfer between diverse information systems by routing, orchestrating and translating requests as they flow between systems. Custom orchestration and translation is accomplished by extending the OpenHIM through the mediator framework ie: OpenHIM Mediators. Mediators are useful for providing implementation specific processing. For example, a client wants a list of data in JSON. The source of this data is from an old system that requires a weird authentication procedure and only provides data in xml. Instead of making changes to either the client system of the data source system the OpenHIM along with an OpenHIM mediator would act as the translator between these two systems. By abstracting away the data transformation and authentication mechanisms this leaves the client and data systems free to only deal with their primary concerns.
+The Open Health Information Mediator(OpenHIM) is a middleware component designed to allow data transfer between diverse information systems by routing, orchestrating and translating requests as they flow between systems. Custom orchestration and translation is accomplished by extending the OpenHIM through the mediator framework ie: OpenHIM Mediators. Mediators are useful for providing implementation specific processing.
 
-![Mediator Diagram](./startUpImages/mediatorDiagram.jpg)
+> For example, a client wants a list of data in JSON. The source of this data is from an old system that requires a weird authentication procedure and only provides data in xml. Instead of making changes to either the client system of the data source system, the OpenHIM along with an OpenHIM mediator would act as the translator between these two systems. By abstracting away the data transformation and authentication mechanisms this leaves the client and data systems free to only deal with their primary concerns.
 
-In this tutorial we will be designing an orchestrator mediator that will accept a request from the client for a list of Health Facilities. In our example, the client wants the facility list in JSON format. [DHIS2](https://docs.dhis2.org/2.28/en/user/html/ch02s02.html) is the source of our facility data and in this example only provides the data in XML. Therefore, our mediator will have to translate the data from XML into JSON before sending the response back to the client.
+In this tutorial we will be starting up an OpenHIM instance on your local machine as well as the openhim mediator bootstrap scaffold. This mediator is purely for demonstration purposes and is in no way production ready. However, the mechanisms used in this mediator can easily be used in your own OpenHIM mediator projects. The repository is also useful to read through as there are detailed comments describing important aspects of an OpenHIM Mediator.
 
 The advantage of using the OpenHIM mediator framework over another stand alone service is that OpenHIM mediators are registered and tracked by your OpenHIM instance. This allows administrators to **view the health status** of the mediator, to easily setup **routing** and **logging** to the registered mediator and to **provide new configuration** settings to the mediator all from the OpenHIM Console.
 
@@ -27,7 +27,6 @@ This tutorial was performed on an Ubuntu 18.04 system and requires the following
 The `git` repositories needed are as follows:
 
 * [Bootstrap Scaffold Mediator](https://github.com/jembi/openhim-mediator-bootstrap-scaffold)
-* [Bootstrap Orchestrator Mediator](https://github.com/jembi/openhim-mediator-bootstrap-orchestrator)
 * [OpenHIM Core v5.2.0](https://github.com/jembi/openhim-core-js)
 
 > Knowledge about ExpressJS and cURL would be helpful though not essential.
