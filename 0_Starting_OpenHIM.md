@@ -93,6 +93,8 @@ volumes:
 
 ```
 
+---
+
 ### Step 2 - Starting the OpenHIM
 
 In the terminal, whilst still in the directory containing the `docker-compose.yml` file, run the following command:
@@ -104,6 +106,8 @@ docker-compose up
 > Include `-d` in the previous command if you want the process to run in the background.
 
 The docker-compose script will start up the OpenHIM-core, OpenHIM-console and a MongoDB instance. All these services communicate with each other over a defined docker network. This network will be important in the next step.
+
+---
 
 ### Step 3- Changing OpenHIM default password
 
@@ -123,6 +127,8 @@ Depending on the browser the browser will load a screen indicating that the cert
 
 Finally you will be presented with a screen requiring to reset the default user's password. For this tutorial please set this to `password` for simplicity.
 
+---
+
 ### Step 4 - Adding an OpenHIM client
 
 On the OpenHIM Console, navigate to the `Clients` menu option. Under the client's section click the add client button.
@@ -136,3 +142,5 @@ In the *Add a client* modal, fill in the following details, Add New Role **admin
 ![Add a Client](./startUpImages/addClient.png)
 
 > The client ID and password are going to be needed later for authenticating requests to the OpenHIM.
+
+---
