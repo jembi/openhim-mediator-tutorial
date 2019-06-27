@@ -1,4 +1,4 @@
-# ![Open Health Information Exchange Mediator Logo](./startUpImages/openhimLogoGreen.svg)
+# ![Open Health Information Exchange Mediator Logo](images/openhimLogoGreen.svg)
 
 ## **Scaffold OpenHIM Mediator Tutorial**
 
@@ -189,7 +189,7 @@ docker run --network tutorial_openhim --rm -p 3000:3000 scaffold
 
 Check that your mediator has registered correctly by navigating to the OpenHIM Console Mediator Page on `https://localhost:9000/#!/mediators`
 
-![Mediator Registered](./startUpImages/registeredMediator.png)
+![Mediator Registered](images/registeredMediator.png)
 
 ---
 
@@ -281,7 +281,7 @@ fetchConfig(openhimConfig, (err, initialConfig) => {
 
 Test the fetch config function is working on the console. To do this, navigate to the [mediators page](https://localhost:9000/#!/mediators) on the OpenHIM Console then delete the existing scaffold mediator there.
 
-![Delete mediator](./startUpImages/deleteMediator.png)
+![Delete mediator](images/deleteMediator.png)
 
 Back in your terminal rebuild the scaffold mediator docker image and start the container.
 
@@ -293,15 +293,15 @@ docker run --network tutorial_openhim --rm -p 3000:3000 scaffold
 
 The terminal output should be:
 
-![Empty Config Terminal Output](./startUpImages/emptyConfigTerminalOutput.png)
+![Empty Config Terminal Output](images/emptyConfigTerminalOutput.png)
 
 Go back to the mediator page and click the blue gear icon. In the Modal enter something into the fields.
 
-![Add Mediator Config](startUpImages/addMediatorConfig.png)
+![Add Mediator Config](images/addMediatorConfig.png)
 
 Go back to your terminal and stop the container. Restart it and your should see your config input.
 
-![Content in Config Terminal Output](startUpImages/contentInConfigTerminalOutput.png)
+![Content in Config Terminal Output](images/contentInConfigTerminalOutput.png)
 
 This function is useful however, the OpenHIM is capable of updating specific configuration details on the fly and emit a notification to the mediator to get the new config. This function is tied to the activateHeartbeat function.
 Make the following changes to the `index.js` file:
@@ -328,10 +328,10 @@ docker run --network tutorial_openhim --rm -p 3000:3000 scaffold
 
 Go to the mediators page and click the blue gear icon to edit the mediator config. Enter some new data in the fields and save changes. This will emit a `config` event which will now be picked up by the mediator.
 
-![New Config in Mediator](startUpImages/newConfigInMediator.png)
+![New Config in Mediator](images/newConfigInMediator.png)
 
 Switch back to your terminal and the new config should be in the terminal output.
 
-![New Config In Terminal Output](startUpImages/newConfigInTerminal.png)
+![New Config In Terminal Output](images/newConfigInTerminal.png)
 
 ---

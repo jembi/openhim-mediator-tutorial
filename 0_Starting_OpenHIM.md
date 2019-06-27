@@ -1,4 +1,4 @@
-# ![Open Health Information Exchange Mediator Logo](./startUpImages/openhimLogoGreen.svg)
+# ![Open Health Information Exchange Mediator Logo](images/openhimLogoGreen.svg)
 
 ## **OpenHIM SetUp Tutorial**
 
@@ -35,7 +35,7 @@ This tutorial assumes that you have [docker-compose](https://docs.docker.com/com
 Open a terminal and make a directory in which to store a docker-compose script.
 Create the file `docker-compose.yml`.
 
-![Create Docker Compose Script](./startUpImages/dockerCompose.png)
+![Create Docker Compose Script](images/dockerCompose.png)
 
 Then copy the setup script below into the file.
 
@@ -113,17 +113,17 @@ The docker-compose script will start up the OpenHIM-core, OpenHIM-console and a 
 
 On a browser, navigate to `http://localhost:9000`. You will be presented with the OpenHIM Console login page:
 
-![OpenHIM Console Login](./startUpImages/openhimLogin.png)
+![OpenHIM Console Login](images/openhimLogin.png)
 
 Enter the default username and password: `root@openhim.org` : `openhim-password`.
 
 As this is a development environment the SSL certificate is self-signed and cannot be authenticated. Therefore after entering the default credentials a textbox will appear beneath the login button requesting that the user follow a link to allow the browser to accept the self-signed certificate.
 
-![Self-signed certificate link](./startUpImages/selfSignAccept.png)
+![Self-signed certificate link](images/selfSignAccept.png)
 
 Depending on the browser the browser will load a screen indicating that the certificate cannot be validated. To bypass this click the advanced options then click on the link to proceed to the localhost destination.
 
-![Chrome Insecure Connection Notice Bypass](./startUpImages/advanced.png)
+![Chrome Insecure Connection Notice Bypass](images/advanced.png)
 
 Finally you will be presented with a screen requiring to reset the default user's password. For this tutorial please set this to `password` for simplicity.
 
@@ -139,7 +139,7 @@ In the *Add a client* modal, fill in the following details, Add New Role **admin
 * **Client Name** : test
 * **Basic Auth Password** & **Confirm Password** : test
 
-![Add a Client](./startUpImages/addClient.png)
+![Add a Client](images/addClient.png)
 
 > The client ID and password are going to be needed later for authenticating requests to the OpenHIM.
 
