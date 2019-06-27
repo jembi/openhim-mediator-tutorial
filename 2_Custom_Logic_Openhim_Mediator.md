@@ -6,11 +6,11 @@
 
 ## Useful Links
 
-http://openhim.org/
+[OpenHIM Resources](http://openhim.org/)
 
-https://github.com/jembi/openhim-mediator-bootstrap-orchestrator
+[OpenHIM Orchestrator Bootstrap Mediator](https://github.com/jembi/openhim-mediator-bootstrap-orchestrator)
 
-https://www.jembi.org/
+[Jembi Health Systems NPC](https://www.jembi.org/)
 
 ## Introduction
 

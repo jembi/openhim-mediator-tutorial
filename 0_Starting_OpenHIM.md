@@ -6,11 +6,11 @@
 
 ## Useful Links
 
-http://openhim.org/
+[OpenHIM Resources](http://openhim.org/)
 
-https://github.com/jembi/openhim-core-js
+[OpenHIM Core Github Repository](https://github.com/jembi/openhim-core-js)
 
-https://www.jembi.org/
+[Jembi Health Systems NPC](https://www.jembi.org/)
 
 ## Introduction
 
