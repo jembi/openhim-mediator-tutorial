@@ -190,3 +190,132 @@ Check that your mediator has registered correctly by navigating to the OpenHIM C
 ![Mediator Registered](./startUpImages/registeredMediator.png)
 
 ### Step 3 - Adding Mediator Heartbeat
+
+To add a mediator heartbeat, import the `activateHeartbeat` method form `openhim-mediator-utils`. This function takes in the `openhimConfig` option set to instantiate as well as the mediator's `urn` within that object. Therefore, to keep the file neat let's import the `urn` from `mediatorConfig` and add this variable to the openhimConfig object. Instantiate the `activateHeartbeat` method within the `app.listen`. The `index.js` file should now resemble this:
+
+> Why is the `activateHeartbeat` function always instantiated within the `app.listen` function
+
+```js
+'use strict'
+
+import express from 'express'
+import {registerMediator, activateHeartbeat, fetchConfig} from 'openhim-mediator-utils'
+import mediatorConfig, {urn} from './mediatorConfig.json'
+
+const app = express()
+
+const openhimConfig = {
+    username: 'root@openhim.org',
+    password: 'password',
+    apiURL: 'https://openhim-core:8080',
+    trustSelfSigned: true,
+    urn
+}
+
+app.all('*', (req, res) => {
+    res.send('Hello World')
+})
+
+app.listen(3000, ()=> {
+    console.log('Server listening on port 3000...')
+    activateHeartbeat(openhimConfig)
+})
+
+registerMediator(openhimConfig, mediatorConfig, err => {
+    if (err) {
+        console.error('Check your config!', err)
+        process.exit(1)
+    }
+})
+```
+
+### Step 4 - Fetching Mediator Configuration from openHIM
+
+To enable the OpenHIM to store console editable configuration details, we need to provide the template for these details within the `mediatorConfig.json` file. Add the following config template information beneath the **endpoints** entry within the `mediatorConfig.json`.
+
+```json
+,"configDefs": [
+  {
+    "param": "tutorial",
+    "displayName": "Tutorial variables",
+    "description": "Some variables to demonstrate fetching OpenHIM mediator config",
+    "type": "struct",
+    "array": false,
+    "template": [
+      {
+        "param": "variable_1",
+        "displayName": "Variable 1",
+        "description": "First Variable",
+        "type": "string"
+      },
+      {
+        "param": "variable_2",
+        "displayName": "Variable 2",
+        "description": "Second Variable",
+        "type": "string"
+      }
+    ]
+  }
+]
+```
+
+Next, within `index.js` import `fetchConfig` from `openhim-mediator-utils` and instantiate `fetchConfig` with the `openhimConfig` object.
+
+```js
+import {fetchConfig} from 'openhim-mediator-utils`'
+
+fetchConfig(openhimConfig, (err, initialConfig) => {
+    if (err){
+        console.error(err)
+        process.exit(1)
+    }
+    console.log('Initial Config: ', JSON.stringify(initialConfig))
+})
+```
+
+Test the fetch config function is working on the console. To do this, navigate to the [mediators page](https://localhost:9000/#!/mediators) on the OpenHIM Console then delete the existing scaffold mediator there.
+
+![Delete mediator](./startUpImages/deleteMediator.png)
+
+Back in your terminal rebuild the scaffold mediator docker image and start the container.
+
+```sh
+docker build -t scaffold .
+
+docker run --network tutorial_openhim --rm -p 3000:3000 scaffold
+```
+
+The terminal output should be:
+
+![Empty Config Terminal Output](./startUpImages/emptyConfigTerminalOutput.png)
+
+Go back to the mediator page and click the blue gear icon. In the Modal enter something into the fields.
+
+![Add Mediator Config](startUpImages/addMediatorConfig.png)
+
+Go back to your terminal and stop the container. Restart it and your should see your config input.
+
+![Content in Config Terminal Output](startUpImages/contentInConfigTerminalOutput.png)
+
+This function is useful however, the OpenHIM is capable of updating specific configuration details on the fly and emit a notification to the mediator to get the new config. This function is tied to the activateHeartbeat function.
+Make the following changes to the `index.js` file:
+
+```js
+const emitter = activateHeartbeat(openhimConfig)
+
+emitter.on('error', err => {
+  console.error('Heartbeat failed: ', err)
+})
+
+emitter.on('config', newConfig => {
+  console.log('Received updated config:', JSON.stringify(newConfig))
+})
+```
+
+Rebuild and start the new container. Your old config entries should be in the terminal output as the *initial config*.
+
+```sh
+docker build -t scaffold .
+
+docker run --network tutorial_openhim --rm -p 3000:3000 scaffold
+```
