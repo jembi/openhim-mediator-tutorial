@@ -102,6 +102,8 @@ You should see the terminal output **Server listening on port 3000...**
 
 Test that the mediator is responding correctly by navigating to `localhost:3000` on a browser where you should see **Hello World**
 
+---
+
 ### Step 2 - Registering the Mediator with the OpenHIM
 
 In a terminal install the npm OpenHIM Mediator Utils package. This utils package enable quick mediator setup as it handles OpenHIM authentication, registering mediator, fetching mediator configuration from the OpenHIM, and creating the mediator heartbeat emitter.
@@ -189,6 +191,8 @@ Check that your mediator has registered correctly by navigating to the OpenHIM C
 
 ![Mediator Registered](./startUpImages/registeredMediator.png)
 
+---
+
 ### Step 3 - Adding Mediator Heartbeat
 
 To add a mediator heartbeat, import the `activateHeartbeat` method form `openhim-mediator-utils`. This function takes in the `openhimConfig` option set to instantiate as well as the mediator's `urn` within that object. Therefore, to keep the file neat let's import the `urn` from `mediatorConfig` and add this variable to the openhimConfig object. Instantiate the `activateHeartbeat` method within the `app.listen`. The `index.js` file should now resemble this:
@@ -228,6 +232,8 @@ registerMediator(openhimConfig, mediatorConfig, err => {
     }
 })
 ```
+
+---
 
 ### Step 4 - Fetching Mediator Configuration from openHIM
 
@@ -319,3 +325,13 @@ docker build -t scaffold .
 
 docker run --network tutorial_openhim --rm -p 3000:3000 scaffold
 ```
+
+Go to the mediators page and click the blue gear icon to edit the mediator config. Enter some new data in the fields and save changes. This will emit a `config` event which will now be picked up by the mediator.
+
+![New Config in Mediator](startUpImages/newConfigInMediator.png)
+
+Switch back to your terminal and the new config should be in the terminal output.
+
+![New Config In Terminal Output](startUpImages/newConfigInTerminal.png)
+
+---
