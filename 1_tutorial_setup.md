@@ -1,4 +1,6 @@
-# Mediator Tutorial Setup
+# ![Open Health Information Exchange Mediator Logo](./startUpImages/openhimLogoGreen.svg)
+
+## **Mediator Tutorial Setup**
 
 **TLDR; Watch Tutorial Setup on [YouTube](https://www.youtube.com/watch?v=DUr_mBWIVXk)**
 
