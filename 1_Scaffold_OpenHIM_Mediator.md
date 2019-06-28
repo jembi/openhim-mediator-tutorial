@@ -184,8 +184,10 @@ docker build -t scaffold .
 
 docker network ls
 
-docker run --network tutorial_openhim --rm -p 3000:3000 scaffold
+docker run --network tutorial_openhim --name scaffold --rm -p 3000:3000 scaffold
 ```
+
+> **Important!** Remember to use the `--name` flag. The name is required to allow the different containers to reference each other.
 
 Check that your mediator has registered correctly by navigating to the OpenHIM Console Mediator Page on `https://localhost:9000/#!/mediators`
 
@@ -193,7 +195,46 @@ Check that your mediator has registered correctly by navigating to the OpenHIM C
 
 ---
 
-### Step 3 - Adding Mediator Heartbeat
+### Step 3 - Adding Default Channel
+
+Next we can setup the default channel. On the Mediators page in the Console, click on the mediator row. This page contains more details about the scaffold mediator. The bottom row describes the available default channel. Click the green plus icon on the right hand bottom corner to create this channel.
+
+![Mediator Details. Add Default Channel](images/mediatorDetails.png)
+
+Once the channel is created navigate to the Channels Menu option to view the Channel. To view the channel details you can click on yellow edit icon on the channel. All the details here are already correct as they were set in the `mediatorConfig.json` file. Navigate to the Routes tab in the modal and click on the yellow edit route icon to view route details.
+
+![Channel Route Details](images/routeDetails.png)
+
+The Route defines where a client's request will be directed. Since we are running the scaffold mediator in a `docker container` we have provided the docker container name as the route `host` variable. `Docker` will resolve requests to the correct IP.
+
+---
+
+### Step 4 - Sending Through First Request Via OpenHIM
+
+With our scaffold mediator channel route setup we can send through our first request that will be tracked by the OpenHIM.
+In a terminal run the following `cURL` command:
+
+```sh
+curl -X GET http://localhost:5001/scaffold -H "Authorization: Basic $(echo -n test:test | base64)"
+```
+
+**Hello World** should come through in the terminal response. To view the request and response details navigate to the OpenHIM Console [Transactions Log](http://localhost:9000/#!/transactions) page. Here you should see your first scaffold mediator transaction.
+
+![First Transaction](images/transaction.png)
+
+Click on this transaction to view details about it.
+
+![Transaction Details](images/transactionDetails.png)
+
+The transaction here was Successful, it went through the Bootstrap Scaffold Mediator Channel, and the client was our `test` client. If needed this transaction could be rerun by clicking the Re-run Transaction button. This would send through the exact same request details and keep a record of the original transaction and any child transactions with all their respective results.
+
+The transaction response and `orchestrations` in the transaction can be updated through the OpenHIM API at a later time if necessary. This is useful for asynchronous requests.
+
+> For example, in a hypothetical system our endpoint information system has a slow processing speed yet, during peak times, our system sends through more requests than the end system can handle. To solve this we could input a [file-queue mediator](https://github.com/jembi/openhim-mediator-file-queue) between the OpenHIM and an orchestration mediator that would store all requests from the client and slowly feed them through to the endpoint via the orchestrator when the endpoint is ready. At the same time, the OpenHIM could respond to the client indicating that the `file-queue mediator` received the request. Each time the client's request gets a response from a mediator this would be added to the list of orchestrations along the request and response details. When the final response is received the transaction can be updated to reflect the overall status of that transaction. ie: Successful, Failed, Completed, or Completed with Errors.
+
+---
+
+### Step 4 - Adding Mediator Heartbeat
 
 To add a mediator heartbeat, import the `activateHeartbeat` method form `openhim-mediator-utils`. This function takes in the `openhimConfig` option set to instantiate as well as the mediator's `urn` within that object. Therefore, to keep the file neat let's import the `urn` from `mediatorConfig` and add this variable to the openhimConfig object. Instantiate the `activateHeartbeat` method within the `app.listen`. The `index.js` file should now resemble this:
 
@@ -235,7 +276,7 @@ registerMediator(openhimConfig, mediatorConfig, err => {
 
 ---
 
-### Step 4 - Fetching Mediator Configuration from openHIM
+### Step 5 - Fetching Mediator Configuration from openHIM
 
 To enable the OpenHIM to store console editable configuration details, we need to provide the template for these details within the `mediatorConfig.json` file. Add the following config template information beneath the **endpoints** entry within the `mediatorConfig.json`.
 
@@ -288,7 +329,7 @@ Back in your terminal rebuild the scaffold mediator docker image and start the c
 ```sh
 docker build -t scaffold .
 
-docker run --network tutorial_openhim --rm -p 3000:3000 scaffold
+docker run --network tutorial_openhim --rm --name scaffold -p 3000:3000 scaffold
 ```
 
 The terminal output should be:
@@ -323,7 +364,7 @@ Rebuild and start the new container. Your old config entries should be in the te
 ```sh
 docker build -t scaffold .
 
-docker run --network tutorial_openhim --rm -p 3000:3000 scaffold
+docker run --network tutorial_openhim --rm --name scaffold -p 3000:3000 scaffold
 ```
 
 Go to the mediators page and click the blue gear icon to edit the mediator config. Enter some new data in the fields and save changes. This will emit a `config` event which will now be picked up by the mediator.
