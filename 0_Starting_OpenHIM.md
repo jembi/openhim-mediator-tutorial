@@ -133,11 +133,11 @@ Finally you will be presented with a screen requiring to reset the default user'
 
 On the OpenHIM Console, navigate to the `Clients` menu option. Under the client's section click the add client button.
 
-In the *Add a client* modal, fill in the following details, Add New Role **admin** (press `Enter` after typing in **admin**), then **Save changes**:
+In the _Add a client_ modal, fill in the following details, Add New Role **admin** (press `Enter` after typing in **admin**), then **Save changes**:
 
-* **Client ID** : test
-* **Client Name** : test
-* **Basic Auth Password** & **Confirm Password** : test
+- **Client ID** : test
+- **Client Name** : test
+- **Basic Auth Password** & **Confirm Password** : test
 
 ![Add a Client](images/addClient.png)
 

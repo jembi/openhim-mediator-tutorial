@@ -22,7 +22,7 @@ The advantage of using the OpenHIM mediator framework over another stand alone s
 
 ## Prerequisites
 
-* Node and NPM
+- Node and NPM
 
 This tutorial assumes you have already successfully setup the OpenHIM.
 
@@ -82,11 +82,11 @@ import express from 'express'
 const app = express()
 
 app.all('*', (req, res) => {
-    res.send('Hello World')
+  res.send('Hello World')
 })
 
-app.listen(3000, ()=> {
-    console.log('Server listening on port 3000...')
+app.listen(3000, () => {
+  console.log('Server listening on port 3000...')
 })
 ```
 
@@ -155,27 +155,27 @@ In your IDE, create a new file called `mediatorConfig.json`. Within this file pl
 Open `index.js` and import the registerMediator function from `openhim-mediator-utils` as well as the `mediatorConfig.json` file. Next declare a new object openhimConfig with the details below and instantiate the `registerMediator` function with `openhimConfig`, `mediatorConfig`, and a callback
 
 ```js
-import {registerMediator} from 'openhim-mediator-utils'
+import { registerMediator } from 'openhim-mediator-utils'
 import mediatorConfig from './mediatorConfig.json'
 
 // Express Server Code
 
 const openhimConfig = {
-    username: 'root@openhim.org',
-    password: 'password',
-    apiURL: 'https://openhim-core:8080',
-    trustSelfSigned: true
+  username: 'root@openhim.org',
+  password: 'password',
+  apiURL: 'https://openhim-core:8080',
+  trustSelfSigned: true
 }
 
 registerMediator(openhimConfig, mediator, err => {
-    if (err) {
-        console.error('Failed to register mediator. Check your Config:', err)
-        process.exit(1)
-    }
+  if (err) {
+    console.error('Failed to register mediator. Check your Config:', err)
+    process.exit(1)
+  }
 })
 ```
 
-Rebuild the scaffold docker image to include the new changes. Then look up the name of the docker bridge network over which your running openhim instance should be communicating. And finally, start the container including the *network* flag.
+Rebuild the scaffold docker image to include the new changes. Then look up the name of the docker bridge network over which your running openhim instance should be communicating. And finally, start the container including the _network_ flag.
 
 > The docker network name is made of the directory name where the docker-compose script was run appended with **openhim**. In this case `tutorial_openhim`
 
@@ -244,33 +244,33 @@ To add a mediator heartbeat, import the `activateHeartbeat` method form `openhim
 'use strict'
 
 import express from 'express'
-import {registerMediator, activateHeartbeat, fetchConfig} from 'openhim-mediator-utils'
-import mediatorConfig, {urn} from './mediatorConfig.json'
+import { registerMediator, activateHeartbeat } from 'openhim-mediator-utils'
+import mediatorConfig, { urn } from './mediatorConfig.json'
 
 const app = express()
 
 const openhimConfig = {
-    username: 'root@openhim.org',
-    password: 'password',
-    apiURL: 'https://openhim-core:8080',
-    trustSelfSigned: true,
-    urn
+  username: 'root@openhim.org',
+  password: 'password',
+  apiURL: 'https://openhim-core:8080',
+  trustSelfSigned: true,
+  urn
 }
 
 app.all('*', (req, res) => {
-    res.send('Hello World')
+  res.send('Hello World')
 })
 
-app.listen(3000, ()=> {
-    console.log('Server listening on port 3000...')
-    activateHeartbeat(openhimConfig)
+app.listen(3000, () => {
+  console.log('Server listening on port 3000...')
+  activateHeartbeat(openhimConfig)
 })
 
 registerMediator(openhimConfig, mediatorConfig, err => {
-    if (err) {
-        console.error('Check your config!', err)
-        process.exit(1)
-    }
+  if (err) {
+    console.error('Check your config!', err)
+    process.exit(1)
+  }
 })
 ```
 
@@ -309,14 +309,14 @@ To enable the OpenHIM to store console editable configuration details, we need t
 Next, within `index.js` import `fetchConfig` from `openhim-mediator-utils` and instantiate `fetchConfig` with the `openhimConfig` object.
 
 ```js
-import {fetchConfig} from 'openhim-mediator-utils`'
+import { fetchConfig } from 'openhim-mediator-utils`'
 
 fetchConfig(openhimConfig, (err, initialConfig) => {
-    if (err){
-        console.error(err)
-        process.exit(1)
-    }
-    console.log('Initial Config: ', JSON.stringify(initialConfig))
+  if (err) {
+    console.error(err)
+    process.exit(1)
+  }
+  console.log('Initial Config: ', JSON.stringify(initialConfig))
 })
 ```
 
@@ -359,7 +359,7 @@ emitter.on('config', newConfig => {
 })
 ```
 
-Rebuild and start the new container. Your old config entries should be in the terminal output as the *initial config*.
+Rebuild and start the new container. Your old config entries should be in the terminal output as the _initial config_.
 
 ```sh
 docker build -t scaffold .
