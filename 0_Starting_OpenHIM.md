@@ -22,9 +22,9 @@ In this tutorial we will be starting up an OpenHIM instance on your local machin
 
 ## Prerequisites
 
-This tutorial assumes that you have [docker-compose](https://docs.docker.com/compose/) installed on you computer. The tutorial instructions are Linux based.
+This tutorial assumes that you have [docker](https://docs.docker.com/) and [docker-compose](https://docs.docker.com/compose/) installed on you computer. The tutorial instructions are Linux based.
 
-[docker-compose install instructions](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)
+[docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04) and [docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04) install instructions
 
 ---
 
