@@ -22,7 +22,7 @@ The advantage of using the OpenHIM mediator framework over another stand alone s
 
 ## Prerequisites
 
-- Node and NPM
+- NodeJS and NPM
 
 This tutorial assumes you have already successfully setup the OpenHIM.
 
