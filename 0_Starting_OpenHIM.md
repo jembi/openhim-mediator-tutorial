@@ -143,4 +143,45 @@ In the _Add a client_ modal, fill in the following details, Add New Role **admin
 
 > The client ID and password are going to be needed later for authenticating requests to the OpenHIM.
 
+### Step 5 - Testing the OpenHIM Routing
+
+In this step, we are going to create a Channel in the OpenHIM which will route a request from our `test` client through to an echo server which will respond with the data we sent it. The purpose of this is demonstrate the OpenHIM routing as well as the insight gained into our tutorial system that we gain from the Transaction Log.
+
+To start, navigate to the Channels menu option in the OpenHIM Console. Click on **+ Channel** icon to add our first channel. In the modal, add channel name then click on the `Request Matching` tab.
+
+![Echo Channel Name](images/echoChannelName.png)
+
+In this tab, our url pattern will be `/echo` and our `test` client will be given access to the Channel. Then navigate to the `Routes` tab.
+
+![Echo Channel Request Matching](images/echoChannelRequestMatching.png)
+
+Click the **Add New Route** button then input the following information:
+
+- Route Name: **Echo Route**
+- Host: **postman-echo.com**
+- Port: **443**
+- Route Path: **/post**
+
+Select `Yes` for Secured Route, then click Save changes.
+
+![Echo Channel Route](images/echoChannelRoute.png)
+
+To send our request, open a new terminal and enter the following curl command:
+
+```sh
+curl -X POST http://localhost:5001/echo -H "Authorization: Basic $(echo -n test:test | base64)" -H "content-type: application/text" --data "Hello Echo Server!!!"
+```
+
+Look for the data field in the response body in the terminal output.
+
+```sh
+{"args":{},"data":"Hello Echo Server!",
+```
+
+To view this request within the OpenHIM, navigate to the **Transactions Log** in the Console and click on the transaction row to view details.
+
+On this details page you can see the status of the transaction, which client made the request and to which Channel, and the last key feature is the orchestrations section. This section is very useful when your request goes through a chain OpenHIM mediators. The orchestrations section then gives a summary of all the requests that went through as part of your transaction. This list is useful in diagnosing where in your request chain an issue may be occurring. In this case there was only one request therefore the status of the transaction is that of the request. When there are multiple requests occurring as part of transaction then the status reflects the overall outcome of the requests.
+
+![Echo Transaction](images/echoTransaction.png)
+
 ---
