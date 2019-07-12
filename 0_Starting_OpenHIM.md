@@ -2,7 +2,7 @@
 
 ## **OpenHIM SetUp Tutorial**
 
-**TLDR; Watch Linux Tutorial Setup on [YouTube](https://www.youtube.com/watch?v=)**
+**TLDR; Watch Linux Tutorial Setup on [YouTube](https://www.youtube.com/watch?v=DUr_mBWIVXk)**
 
 ## Useful Links
 
