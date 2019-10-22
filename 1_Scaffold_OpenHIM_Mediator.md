@@ -167,7 +167,7 @@ const openhimConfig = {
   trustSelfSigned: true
 }
 
-registerMediator(openhimConfig, mediator, err => {
+registerMediator(openhimConfig, mediatorConfig, err => {
   if (err) {
     console.error('Failed to register mediator. Check your Config:', err)
     process.exit(1)
